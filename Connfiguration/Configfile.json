@@ -1,0 +1,70 @@
+{
+  "Display_column" : {
+                  "display_columns"   : ["Age", "SystolicBP", "DiastolicBP", "BS", "BodyTemp", "HeartRate","RiskLevel"]
+                      },
+  "Operation" :[{
+                  "operation_type"    : "filter",
+                  "column"            : "Age",
+                  "operator"          : ">",
+                  "value"             : 18,
+                  "display columns"   : ["Age", "SystolicBP", "DiastolicBP", "BS", "BodyTemp", "HeartRate","RiskLevel"]
+
+               },
+  {
+                  "operation_type"    : "when then",
+                  "column"            : "RiskLevel",
+                  "operator"          : "in",
+                  "value"             : ["low risk","high risk","mid risk"],
+                  "new_col"           : "new_col2",
+                  "new_val"           : "null"
+
+            }],
+  "Input" : {
+                           "format"   : "file",
+                            "type"    : "csv",
+                               "path" : "D:\\Accelerator_Data\\12334.txt"
+
+  },
+
+  "Schema" :{
+              "columns"  : [{
+                             "name"     : "Age",
+                             "datatype" : "Integer"
+                            },
+                           {
+                             "name"     : "SystolicBP",
+                             "datatype" : "Integer"
+                           },
+                           {
+                             "name"     : "DiastolicBP",
+                             "datatype" : "Integer"
+                           },
+                          {
+                              "name"     : "BS",
+                              "datatype" : "Double"
+                           },
+                          {
+                               "name"     : "BodyTemp",
+                               "datatype" : "Integer"
+                         },
+                         {
+                               "name"     : "HeartRate",
+                               "datatype" : "Integer"
+                           },
+                          {
+                               "name"     : "RiskLevel",
+                               "datatype" : "String"
+                           }
+                        ]
+              },
+
+  "Output" : {
+                           "format"   : "file",
+                            "type"    : "csv",
+                           "path"     : "D:\\Accelerator_Data\\csvRead2",
+                           "header"   : "True"
+
+
+             }
+
+  }

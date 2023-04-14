@@ -1,0 +1,77 @@
+{
+  "Display_column" : {
+               "display_columns"   : ["mpg", "cylinders", "displacement", "horsepower", "weight", "acceleration","model_year","origin","car_name"]
+                      },
+  "Operation" :[{
+                  "operation_type"    : "filter",
+                  "column"            : "cylinders",
+                  "operator"          : ">",
+                  "value"             : 4,
+                  "display columns"   : ["mpg", "cylinders", "displacement", "horsepower", "weight", "acceleration","model_year","origin","car_name"]
+
+               },
+  {
+                  "operation_type"    : "when then",
+                  "column"            : "model_year",
+                  "operator"          : "=",
+                  "value"             : 1,
+                  "new_col"           : "first year",
+                  "new_val"           : "not first year"
+            }],
+  "Input" : {
+                           "format"   : "file",
+                            "type"    : "csv",
+                               "path" : "D:\\Accelerator_Data\\auto-mpg-tushar.csv"
+
+  },
+
+  "Schema" :{
+              "columns"  : [{
+                             "name"     : "mpg",
+                             "datatype" : "Double"
+                            },
+                           {
+                             "name"     : "cylinders",
+                             "datatype" : "Integer"
+                           },
+                           {
+                             "name"     : "displacement",
+                             "datatype" : "Double"
+                           },
+                          {
+                              "name"     : "horsepower",
+                              "datatype" : "Double"
+                           },
+                          {
+                               "name"     : "weight",
+                               "datatype" : "Double"
+                         },
+                         {
+                               "name"     : "acceleration",
+                               "datatype" : "Double"
+                           },
+                          {
+                               "name"     : "model_year",
+                               "datatype" : "Integer"
+                           },
+{
+                               "name"     : "origin",
+                               "datatype" : "Integer"
+                           },
+                          {
+                               "name"     : "car_name",
+                               "datatype" : "String"
+                           }
+                        ]
+              },
+
+  "Output" : {
+                           "format"   : "file",
+                            "type"    : "csv",
+                           "path"     : "D:\\Accelerator_Data\\auto2",
+                           "header"   : "True"
+
+
+             }
+
+  }
