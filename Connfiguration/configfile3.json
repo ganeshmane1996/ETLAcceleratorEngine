@@ -1,0 +1,80 @@
+{
+  "Display_column" : {
+               "display_columns"   : ["Index","Organization_Id","Name","Website","Country","Description","Founded","Industry","Number_of_employees"]
+                      },
+  "Operation" :[{
+                  "operation_type"    : "filter",
+                  "column"            : "Organization_Id",
+                  "operator"          : "in",
+                  "value"             : ["6A7EdDEA9FaDC52","0bFED1ADAE4bcC1","9eE8A6a4Eb96C24","0B4F93aA06ED03e"]
+
+               },
+  {
+                  "operation_type"    : "when then",
+                  "column"            : "Industry",
+                  "operator"          : "in",
+                  "value"             : ["Transportation","Plastics"],
+                  "new_col"           : "new_col2",
+                  "new_val"           : "null"
+            }],
+  "Input" : {
+                           "format"   : "file",
+                            "type"    : "csv",
+                               "path" : "D:\\Accelerator_Data\\industry.csv"
+
+  },
+
+  "Schema" :{
+              "columns"  : [{
+                             "name"     : "Index",
+                             "datatype" : "Integer"
+                            },
+                           {
+                             "name"     : "Organization_Id",
+                             "datatype" : "String"
+                           },
+                           {
+                             "name"     : "Name",
+                             "datatype" : "String"
+                           },
+                          {
+                              "name"     : "Website",
+                              "datatype" : "String"
+                           },
+                          {
+                               "name"     : "Country",
+                               "datatype" : "String"
+                         },
+                         {
+                               "name"     : "Description",
+                               "datatype" : "String"
+                           },
+                          {
+                               "name"     : "Founded",
+                               "datatype" : "Integer"
+                           },
+{
+                               "name"     : "Industry",
+                               "datatype" : "String"
+                           },
+                          {
+                               "name"     : "Number_of_employees",
+                               "datatype" : "Integer"
+                           }
+                        ]
+              },
+
+  "Output" : {
+                           "format"   : "database",
+                              "type"  : "mysql",
+                           "hostname" : "localhost",
+                           "port"     : 3306,
+                           "username" : "root",
+                           "password" : "Satyam@99",
+                           "dbname"   :"industrial_data",
+                           "table"    : "industry"
+
+
+             }
+
+  }

@@ -12,11 +12,11 @@
                },
   {
                   "operation_type"    : "when then",
-                  "column"            : "model_year",
-                  "operator"          : "=",
-                  "value"             : 1,
-                  "new_col"           : "first year",
-                  "new_val"           : "not first year"
+                  "column"            : "car_name",
+                  "operator"          : "in",
+                  "value"             : ["buick skylark 320","amc rebel sst"],
+                  "new_col"           : "new_col2",
+                  "new_val"           : "null"
             }],
   "Input" : {
                            "format"   : "file",

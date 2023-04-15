@@ -71,27 +71,47 @@ def generate_dataframe(dataframe, operations,config):
             query += "{} ".format(",".join(column_names))
             query += "FROM {} ".format("data")
             query += "{} ".format(where_clause)
-            query += "{} {} {}".format(conditional_column, conditional_operator, values)
+            if isinstance(values, list):
+                for val in values:
+                    if isinstance(val, str):
+                        conditional_value_str = '(' + ','.join([f"'{val}'" for val in values]) + ')'
+
+                    else:
+                        conditional_value_str = '(' + ','.join([f"{val}" for val in values]) + ')'
+                query += "{} {} {}".format(conditional_column, conditional_operator, conditional_value_str)
+
+            else:
+                if isinstance(values, str):
+                    conditional_value_str = '(' + f"'{values}'" + ')'
+                    query += "{} {} {}".format(conditional_column, conditional_operator, conditional_value_str)
+                else:
+                    query += "{} {} {}".format(conditional_column, conditional_operator, values)
+
         elif operator_type == 'when then':
             new_col = operation["new_col"]
             new_val = operation["new_val"]
+
+            conditional_value_str = '(' + ','.join([f"'{val}'" for val in values]) + ')'
+            query = select_clause
+            query += "{}".format(",".join(column_names))
             if isinstance(values, list):
-                conditional_value_str = '(' + ','.join([f"'{val}'" for val in values]) + ')'
-                query = select_clause
-                query += "{}".format(",".join(column_names))
+                for val in values:
+                    if isinstance(val, str):
+                        conditional_value_str = '(' + ','.join([f"'{val}'" for val in values]) + ')'
+
+
+                    else:
+                        conditional_value_str = '(' + ','.join([f"{val}" for val in values]) + ')'
+
                 query += ",CASE WHEN {} {} {} THEN {} ELSE {} END AS {} ".format(conditional_column,
                                                                                  conditional_operator,
                                                                                  conditional_value_str,
-                                                                                 conditional_column, new_val, new_col)
-                query += " FROM {}".format("data")
-            else:
-                query = select_clause
-                query += "{}".format(",".join(column_names))
-                query += ",CASE WHEN {} {} {} THEN {} ELSE {} END AS {} ".format(conditional_column,
-                                                                                 conditional_operator,
-                                                                                 values, conditional_column,
-                                                                                 new_val, new_col)
-                query += " FROM {}".format("data")
+                                                                                 conditional_column, new_val,
+                                                                                 new_col)
+
+            query += " FROM {}".format("data")
+
+        print(query)
         new_dataframe = spark.sql(query)
         new_dataframe.createOrReplaceTempView("data")
         return generate_dataframe(new_dataframe, operations[1:], config)

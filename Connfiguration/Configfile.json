@@ -6,8 +6,7 @@
                   "operation_type"    : "filter",
                   "column"            : "Age",
                   "operator"          : ">",
-                  "value"             : 18,
-                  "display columns"   : ["Age", "SystolicBP", "DiastolicBP", "BS", "BodyTemp", "HeartRate","RiskLevel"]
+                  "value"             : 18
 
                },
   {
@@ -20,9 +19,14 @@
 
             }],
   "Input" : {
-                           "format"   : "file",
-                            "type"    : "csv",
-                               "path" : "D:\\Accelerator_Data\\12334.txt"
+                           "format"   : "database",
+                              "type"  : "mysql",
+                           "hostname" : "localhost",
+                           "port"     : 3306,
+                           "username" : "root",
+                           "password" : "Satyam@99",
+                           "dbname"   :"healthcare_database",
+                           "table"    : "healthcare"
 
   },
 
